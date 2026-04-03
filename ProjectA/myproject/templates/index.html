@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายชื่อบุคคล</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .btn-pink {
+            background-color: #FF69B4;
+            border-color: #FF69B4;
+        }
+        .btn-pink:hover {
+            background-color: #E91E63;
+            border-color: #E91E63;
+            color: white;
+        }
+
+        .btn-orange {
+            background-color: #fd7e14;
+            border-color: #fd7e14;
+        }
+        .btn-orange:hover {
+            background-color: #e86e04;
+            border-color: #e86e04;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 p-4 bg-white rounded shadow" style="max-width: 800px;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-secondary mb-0">ตารางรายชื่อบุคคล</h2>
+            <a href="/form/" class="btn btn-success">เพิ่ม Person</a>
+        </div>
+        
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ชื่อ (Name)</th>
+                    <th>อายุ (Age)</th>
+                    <th>วันที่ (Date)</th>
+                    <th class="text-center">จัดการ</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in all_persons %}
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.age }}</td>
+                    <td>{{ p.date }}</td>
+                    
+                        <td class="text-center"> 
+                            <a href="/edit/{{ p.id }}/" class="btn btn-pink text-white btn-sm">แก้ไข</a>
+                            <a href="/delete/{{ p.id }}/" class="btn btn-orange text-white btn-sm" onclick="return confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?')">ลบ</a>
+                        </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted p-4">ยังไม่มีข้อมูลในระบบ</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
